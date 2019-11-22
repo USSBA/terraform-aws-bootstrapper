@@ -6,6 +6,7 @@ terraform {
 }
 data "aws_caller_identity" "current" {}
 locals {
+  # Only creates bucket when current account is where the bucket lives
   bucket_count = data.aws_caller_identity.current.account_id == var.bucket_source_account_id ? 1 : 0
 }
 
