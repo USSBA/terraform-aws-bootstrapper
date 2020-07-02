@@ -1,9 +1,3 @@
-terraform {
-  required_version = "~> 0.12.10"
-  required_providers {
-    aws = "~> 2.20"
-  }
-}
 data "aws_caller_identity" "current" {}
 locals {
   # Only creates bucket when current account is where the bucket lives
