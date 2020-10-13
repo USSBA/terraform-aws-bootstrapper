@@ -1,7 +1,9 @@
 terraform {
-  required_version = "~> 0.12.10"
   required_providers {
-    aws = "~> 2.20"
+    aws = {
+      source  = "hashicorp/aws"
+      version = "< 4, >= 2.20"
+    }
   }
 }
 data "aws_caller_identity" "current" {}
@@ -47,7 +49,7 @@ data "aws_iam_policy_document" "bucket_policy" {
       type        = "AWS"
       identifiers = formatlist("arn:aws:iam::%s:root", var.account_ids)
     }
-    resources = ["${aws_s3_bucket.bucket[0].arn}"]
+    resources = [aws_s3_bucket.bucket[0].arn]
   }
 }
 resource "aws_s3_bucket_policy" "bucket_policy" {

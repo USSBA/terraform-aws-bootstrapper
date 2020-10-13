@@ -20,7 +20,7 @@ terraform/
 
 We strongly recommend using a `.gitignore` in the bootstrap directory that includes:
 
-```
+```shell
 .terraform/
 terraform.tfstate.backup
 ```
