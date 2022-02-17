@@ -10,14 +10,18 @@ locals {
 resource "aws_s3_bucket" "bucket" {
   count  = local.bucket_count
   bucket = var.bucket_name
-  versioning {
-    enabled = true
-  }
   tags = {
     Name = "Terraform S3 Backend State Store"
   }
 }
 
+resource "aws_s3_bucket_versioning" "bucket_version" {
+  count  = local.bucket_count
+  bucket = aws_s3_bucket.bucket[0].id
+  versioning_configuration {
+    status = "Enabled"
+  }
+}
 ## Bucket Policy
 ## Note: The policy will allow S3 read/write actions for each account ID passed to the module
 resource "aws_s3_bucket_policy" "bucket_policy" {
