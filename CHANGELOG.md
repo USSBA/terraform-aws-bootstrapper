@@ -2,6 +2,11 @@
 
 ## AWS Provider 4.X.X
 
+### v2.1.0
+
+* Added new **string(list)** variable `principals` that can be used to override the default of root
+but must line up same number of elements in the `account_ids` list
+
 ### v2.0.0
 
 * Support for AWS Provider 4.1

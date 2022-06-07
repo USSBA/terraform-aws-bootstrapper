@@ -57,6 +57,23 @@ module "my-aws-terraform-remote-state" {
 }
 ```
 
+If you want to limit access to the bucket to a specific set of AWS principals.
+```terraform
+module "my-aws-terraform-remote-state" {
+  source                   = "USSBA/bootstrapper/aws"
+  bucket_name              = "my-bucket"
+  bucket_source_account_id = "123412341234"
+  lock_table_names         = ["my-locktable"]
+  account_ids              = [
+    "123412341234",
+    "678967896789"
+  ]
+  principals               = [
+    "role/role-name", # matches with account_ids[0] --> 123412341234
+    "role/role-name", # matches with account_ids[1] --> 678967896789
+  ]
+```
+
 ## Configuration
 
 Once you have applied the bootstrap module to each of your AWS accounts you may now take advantage of those resources to [configure](https://www.terraform.io/docs/backends/config.html) the [S3 backend](https://www.terraform.io/docs/backends/types/s3.html).
