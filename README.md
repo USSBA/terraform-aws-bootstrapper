@@ -43,6 +43,9 @@ terraform-project/
 `lock_table_names`
 - A list of lock-table names to be created, but in most cases a single table is more then adequate.
 
+`tags`
+- Optional; A map of tags (key, value) pairs for s3 and dynamodb table.
+
 ### Module Example
 
 It is recommended to create a directory within your terraform code project named `bootstrap` and within that directory create a new `.tf` file with a name of your choosing, copy and paste the following code snippet then customize the settings to your liking.
@@ -54,6 +57,10 @@ module "my-aws-terraform-remote-state" {
   bucket_source_account_id = "000011112222"
   account_ids              = ["000011112222", "333344445555"]
   lock_table_names         = ["my-terraform-remote-state-locktable"]
+
+  tags = {
+    foo = bar
+  }
 }
 ```
 

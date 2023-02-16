@@ -2,6 +2,9 @@
 
 ## AWS Provider 4.X.X
 
+### v2.2.0
+* Added new **tags** variable that can be used to add additional tags to the dynamodb table and s3 bucket.
+
 ### v2.1.0
 
 * Added new **string(list)** variable `principals` that can be used to override the default of root
