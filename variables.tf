@@ -19,3 +19,8 @@ variable "principals" {
   description = "Optional; A list of AWS principals (user/prfix/userId, role/prefix/roleName), that is applied to the bucket policy. Default is \"root\""
   default     = []
 }
+variable "tags" {
+  type        = map(string)
+  description = "Optional; A map of tags (key, value) pairs for s3 and dynamodb table"
+  default     = {}
+}

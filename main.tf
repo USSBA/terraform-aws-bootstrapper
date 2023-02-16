@@ -10,9 +10,9 @@ locals {
 resource "aws_s3_bucket" "bucket" {
   count  = local.bucket_count
   bucket = var.bucket_name
-  tags = {
-    Name = "Terraform S3 Backend State Store"
-  }
+  tags = merge(var.tags, {
+    Name = "Terraform S3 Backend State Store",
+  })
 }
 
 resource "aws_s3_bucket_versioning" "bucket_version" {
@@ -72,7 +72,7 @@ resource "aws_dynamodb_table" "locktable" {
     type = "S"
   }
 
-  tags = {
-    Name = "Locktable"
-  }
+  tags = merge(var.tags, {
+    Name = "Locktable",
+  })
 }
