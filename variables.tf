@@ -24,3 +24,13 @@ variable "tags" {
   description = "Optional; A map of tags (key, value) pairs for s3 and dynamodb table"
   default     = {}
 }
+variable "log_bucket" {
+  type        = string
+  description = "Optional; An s3 bucket where log files will be delivered"
+  default     = ""
+}
+variable "log_prefix" {
+  type        = string
+  description = "Optional; A prefix placed on log files as they are delivered to the log_bucket"
+  default     = "logs/"
+}
