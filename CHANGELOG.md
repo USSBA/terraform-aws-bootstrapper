@@ -2,10 +2,16 @@
 
 ## AWS Provider 4.X.X
 
+### v2.4.0
+
+* Added s3 bucket public access blocking, this is enabled by default. As this bucket should not be public.
+
 ### v2.3.0
+
 * Added support for s3 logging.
 
 ### v2.2.0
+
 * Added new **tags** variable that can be used to add additional tags to the dynamodb table and s3 bucket.
 
 ### v2.1.0
