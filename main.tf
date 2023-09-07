@@ -17,7 +17,7 @@ resource "aws_s3_bucket" "bucket" {
 }
 
 resource "aws_s3_bucket_public_access_block" "bucket_access" {
-  count = local.bucket_count
+  count  = local.bucket_count
   bucket = aws_s3_bucket.bucket[0].id
 
   block_public_acls       = true
