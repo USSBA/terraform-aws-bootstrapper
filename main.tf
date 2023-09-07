@@ -15,6 +15,17 @@ resource "aws_s3_bucket" "bucket" {
     Name = "Terraform S3 Backend State Store",
   })
 }
+
+resource "aws_s3_bucket_public_access_block" "bucket_access" {
+  count = local.bucket_count
+  bucket = aws_s3_bucket.bucket[0].id
+
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
+}
+
 resource "aws_s3_bucket_logging" "bucket_logging" {
   count = local.bucket_count - (length(trim(var.log_bucket, " ")) == 0 ? 1 : 0)
 
