@@ -1,5 +1,11 @@
 # Releases
 
+## AWS Provider 5.X.X
+
+### v3.0.0
+
+* Module now requires Terraform ~> 1.5 and Provider ~> 5.0
+
 ## AWS Provider 4.X.X
 
 ### v2.4.0
