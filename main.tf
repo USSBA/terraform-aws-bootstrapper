@@ -11,7 +11,7 @@ resource "aws_s3_bucket" "bucket" {
   count = local.bucket_count
 
   bucket = var.bucket_name
-  tags = merge(var.tags, {
+  tags = merge(var.tags, var.backup_tags, {
     Name = "Terraform S3 Backend State Store",
   })
 }
