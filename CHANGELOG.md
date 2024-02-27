@@ -1,5 +1,9 @@
 # Releases
 
+### v3.1.0
+
+* Added a new `backup_tags(map)` variable that can be used to set backup tags on the Terraform s3 backend bucket for the AWS Backup Vault service. **These tags must already be configured on the AWS Backup Vault, this module does not supply that functionality**.
+
 ## AWS Provider 5.X.X
 
 ### v3.0.0

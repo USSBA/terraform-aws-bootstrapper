@@ -26,7 +26,7 @@ variable "tags" {
 }
 variable "backup_tags" {
   type        = map(string)
-  description = "Optional; Supply a list of tags that are supported by AWS Backup Vault."
+  description = "Optional; Supply a list of tags that are supported by AWS Backup Vault. These tags are applied to the Terraform s3 bucket."
   default     = {}
 }
 variable "log_bucket" {
