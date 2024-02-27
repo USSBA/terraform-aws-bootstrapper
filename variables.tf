@@ -24,6 +24,11 @@ variable "tags" {
   description = "Optional; A map of tags (key, value) pairs for s3 and dynamodb table"
   default     = {}
 }
+variable "backup_tags" {
+  type        = map(string)
+  description = "Optional; Supply a list of tags that are supported by AWS Backup Vault."
+  default     = {}
+}
 variable "log_bucket" {
   type        = string
   description = "Optional; An s3 bucket where log files will be delivered"
