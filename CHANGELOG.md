@@ -1,5 +1,11 @@
 # Releases
 
+## Terraform v1.9.x
+
+### v3.2.0
+
+* Terraform v1.9 is now the minimum required version
+
 ### v3.1.0
 
 * Added a new `backup_tags(map)` variable that can be used to set backup tags on the Terraform s3 backend bucket for the AWS Backup Vault service. **These tags must already be configured on the AWS Backup Vault, this module does not supply that functionality**.
