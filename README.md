@@ -114,6 +114,35 @@ terraform {
   }
 }
 ```
+Terraform now supports native S3 state locking.
+Enable it with use_lockfile = true in your backend configuration:
+
+```terraform
+terraform {
+  backend "s3" {
+    bucket               = "my-terraform-remote-state-bucket"
+    key                  = "aplication2.tfstate"
+    region               = "us-east-1"
+    use_lockfile = true
+    # Optional during migration:
+    # dynamodb_table     = "my-terraform-remote-state-locktable"
+    workspace_key_prefix = "applicaitons"
+    acl                  = "bucket-owner-full-control"
+  }
+}
+```
+
+## Lifecycle Configuration
+
+This module configures an S3 lifecycle rule for the state bucket to:
+
+Remove expired delete markers
+
+Abort incomplete multipart uploads after abort_incomplete_mpu_days (default 7)
+
+Retain noncurrent versions for noncurrent_version_retention_days (default 365)
+
+This helps control costs and manage object history while keeping state file recovery possible.
 
 ## Contributing
 

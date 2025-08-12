@@ -39,3 +39,15 @@ variable "log_prefix" {
   description = "Optional; A prefix placed on log files as they are delivered to the log_bucket"
   default     = "logs/"
 }
+
+variable "noncurrent_version_retention_days" {
+  type        = number
+  description = "Days to retain noncurrent object versions (state history)."
+  default     = 365
+}
+
+variable "abort_incomplete_mpu_days" {
+  type        = number
+  description = "Days after which incomplete multipart uploads are aborted."
+  default     = 7
+}

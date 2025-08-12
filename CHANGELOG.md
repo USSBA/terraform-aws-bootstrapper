@@ -1,5 +1,12 @@
 # Releases
 
+## Terraform v1.12.x
+
+### v3.3.0
+
+* Terraform v1.12 is now the minimum required version.
+* Added bucket policy statement to allow deletion of `.tflock` files for native S3 state locking.
+
 ## Terraform v1.9.x
 
 ### v3.2.0

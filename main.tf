@@ -42,6 +42,33 @@ resource "aws_s3_bucket_versioning" "bucket_version" {
   }
 }
 
+## Bucket Lifecycle
+## Note: Cleans up expired delete markers, keeps noncurrent versions, and aborts incomplete MPUs
+resource "aws_s3_bucket_lifecycle_configuration" "bucket_lifecycle" {
+  count  = local.bucket_count
+  bucket = aws_s3_bucket.bucket[0].id
+
+  rule {
+    id     = "cleanup-delete-markers-and-retain-versions"
+    status = "Enabled"
+
+    # Applies to entire bucket (S3 lifecycle can't filter by suffix)
+    filter {}
+
+    expiration {
+      expired_object_delete_marker = true
+    }
+
+    noncurrent_version_expiration {
+      noncurrent_days = var.noncurrent_version_retention_days
+    }
+
+    abort_incomplete_multipart_upload {
+      days_after_initiation = var.abort_incomplete_mpu_days
+    }
+  }
+}
+
 ## Bucket Policy
 ## Note: The policy will allow S3 read/write actions for each account ID passed to the module
 resource "aws_s3_bucket_policy" "bucket_policy" {
@@ -76,6 +103,21 @@ data "aws_iam_policy_document" "bucket_policy" {
       identifiers = formatlist("arn:aws:iam::%s:%s", var.account_ids, length(var.principals) == 0 ? [for x in var.account_ids : "root"] : var.principals)
     }
     resources = [aws_s3_bucket.bucket[0].arn]
+  }
+
+  # NEW: allow deletion of ONLY .tflock files (used by native S3 lockfile)
+  statement {
+    sid     = "AllowDeleteOnlyTFLock"
+    actions = ["s3:DeleteObject"]
+    principals {
+      type        = "AWS"
+      identifiers = formatlist("arn:aws:iam::%s:%s", var.account_ids, length(var.principals) == 0 ? [for x in var.account_ids : "root"] : var.principals)
+    }
+    # cover flat keys and one-level prefixes (e.g., workspace/prefix)
+    resources = [
+      "${aws_s3_bucket.bucket[0].arn}/*.tflock",
+      "${aws_s3_bucket.bucket[0].arn}/*/*.tflock"
+    ]
   }
 }
 
