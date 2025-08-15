@@ -115,8 +115,7 @@ data "aws_iam_policy_document" "bucket_policy" {
     }
     # cover flat keys and one-level prefixes (e.g., workspace/prefix)
     resources = [
-      "${aws_s3_bucket.bucket[0].arn}/*.tflock",
-      "${aws_s3_bucket.bucket[0].arn}/*/*.tflock"
+      "${aws_s3_bucket.bucket[0].arn}/*.tflock"
     ]
   }
 }
