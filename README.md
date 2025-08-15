@@ -140,9 +140,15 @@ Remove expired delete markers
 
 Abort incomplete multipart uploads after abort_incomplete_mpu_days (default 7)
 
-Retain noncurrent versions for noncurrent_version_retention_days (default 365)
+Retain noncurrent versions for noncurrent_version_retention_days (default 90)
 
 This helps control costs and manage object history while keeping state file recovery possible.
+
+**Note:**
+
+The `.tflock` files are temporary lock files created during `terraform apply` or `terraform plan`.  
+S3 lifecycle rules cannot target only `.tflock` files, so the same retention period applies to both `.tfstate` and `.tflock`.  
+This means delete markers for `.tflock` files will remain for 90 days (this is what the noncurrent retention period is set to right now in variables file), just like `.tfstate` versions.
 
 ## Contributing
 

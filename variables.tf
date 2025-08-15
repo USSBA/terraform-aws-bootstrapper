@@ -43,7 +43,7 @@ variable "log_prefix" {
 variable "noncurrent_version_retention_days" {
   type        = number
   description = "Days to retain noncurrent object versions (state history)."
-  default     = 365
+  default     = 90
 }
 
 variable "abort_incomplete_mpu_days" {
