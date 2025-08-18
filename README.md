@@ -136,11 +136,9 @@ terraform {
 
 This module configures an S3 lifecycle rule for the state bucket to:
 
-Remove expired delete markers
-
-Abort incomplete multipart uploads after abort_incomplete_mpu_days (default 7)
-
-Retain noncurrent versions for noncurrent_version_retention_days (default 90)
+* Remove expired delete markers
+* Abort incomplete multipart uploads after `abort_incomplete_mpu_days` (default 7)
+* Retain noncurrent versions for `noncurrent_version_retention_days` (default 90)
 
 This helps control costs and manage object history while keeping state file recovery possible.
 

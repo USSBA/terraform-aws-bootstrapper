@@ -105,7 +105,7 @@ data "aws_iam_policy_document" "bucket_policy" {
     resources = [aws_s3_bucket.bucket[0].arn]
   }
 
-  # NEW: allow deletion of ONLY .tflock files (used by native S3 lockfile)
+  #Allow deletion of ONLY .tflock files (used by native S3 lockfile)
   statement {
     sid     = "AllowDeleteOnlyTFLock"
     actions = ["s3:DeleteObject"]
