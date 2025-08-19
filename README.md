@@ -79,6 +79,7 @@ module "my-aws-terraform-remote-state" {
     "role/role-name", # matches with account_ids[0] --> 123412341234
     "role/role-name", # matches with account_ids[1] --> 678967896789
   ]
+}
 ```
 
 ## Configuration
@@ -91,10 +92,10 @@ Using the directory structure suggested above lets create a new file in the `app
 terraform {
   backend "s3" {
     bucket               = "my-terraform-remote-state-bucket"
-    key                  = "aplication1.tfstate"
+    key                  = "application1.tfstate"
     region               = "us-east-1"
     dynamodb_table       = "my-terraform-remote-state-locktable"
-    workspace_key_prefix = "applicaitons"
+    workspace_key_prefix = "applications"
     acl                  = "bucket-owner-full-control"
   }
 }
@@ -106,10 +107,10 @@ Now, lets configure the `application2` backend, but notice that we change the `k
 terraform {
   backend "s3" {
     bucket               = "my-terraform-remote-state-bucket"
-    key                  = "aplication2.tfstate"
+    key                  = "application2.tfstate"
     region               = "us-east-1"
     dynamodb_table       = "my-terraform-remote-state-locktable"
-    workspace_key_prefix = "applicaitons"
+    workspace_key_prefix = "applications"
     acl                  = "bucket-owner-full-control"
   }
 }
@@ -121,12 +122,12 @@ Enable it with use_lockfile = true in your backend configuration:
 terraform {
   backend "s3" {
     bucket               = "my-terraform-remote-state-bucket"
-    key                  = "aplication2.tfstate"
+    key                  = "application2.tfstate"
     region               = "us-east-1"
     use_lockfile = true
     # Optional during migration:
     # dynamodb_table     = "my-terraform-remote-state-locktable"
-    workspace_key_prefix = "applicaitons"
+    workspace_key_prefix = "applications"
     acl                  = "bucket-owner-full-control"
   }
 }
